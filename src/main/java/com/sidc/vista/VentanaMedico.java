@@ -5,6 +5,13 @@
  */
 package com.sidc.vista;
 
+import com.sidc.clases.Persona;
+import static com.sidc.controllers.ControllerPersona.getPersonaByDni;
+import java.awt.Color;
+import java.awt.Image;
+import java.awt.Toolkit;
+import javax.swing.DefaultListModel;
+
 /**
  *
  * @author julian
@@ -20,7 +27,11 @@ public class VentanaMedico extends javax.swing.JFrame {
         setSize(800,600);
         this.setLocationRelativeTo(null);
     }
-
+ 
+     public Image getIconImage(){
+        Image retValue=Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("imagenes/SIDC (1).png"));
+        return retValue;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -31,9 +42,15 @@ public class VentanaMedico extends javax.swing.JFrame {
     private void initComponents() {
 
         jButton1 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        txtUsuario = new javax.swing.JTextField();
+        btnVerificar = new javax.swing.JButton();
+        resNombre = new javax.swing.JLabel();
         fondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setIconImage(getIconImage());
+        setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jButton1.setBackground(new java.awt.Color(0, 0, 0));
@@ -48,6 +65,27 @@ public class VentanaMedico extends javax.swing.JFrame {
         });
         getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 40, 80, -1));
 
+        jLabel1.setFont(new java.awt.Font("Gill Sans MT", 3, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 153, 153));
+        jLabel1.setText("Por favor ingrese el DNI del paciente");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 310, 30));
+        getContentPane().add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 180, 30));
+
+        btnVerificar.setBackground(new java.awt.Color(0, 0, 0));
+        btnVerificar.setFont(new java.awt.Font("Gill Sans MT", 3, 14)); // NOI18N
+        btnVerificar.setForeground(new java.awt.Color(0, 153, 153));
+        btnVerificar.setText("Verificar");
+        btnVerificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVerificarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnVerificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 90, -1, -1));
+
+        resNombre.setFont(new java.awt.Font("Gill Sans MT", 3, 14)); // NOI18N
+        resNombre.setForeground(new java.awt.Color(0, 153, 153));
+        getContentPane().add(resNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 100, 210, 30));
+
         fondo.setBackground(new java.awt.Color(0, 153, 255));
         fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/medical-background.png"))); // NOI18N
         getContentPane().add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(-90, -60, -1, -1));
@@ -58,6 +96,19 @@ public class VentanaMedico extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
           System.exit(0);         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void btnVerificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerificarActionPerformed
+        DefaultListModel cosas=new DefaultListModel();
+        Persona p;
+        try{
+            int numDni=Integer.parseInt(txtUsuario.getText());
+            p=getPersonaByDni(numDni);
+        }
+        catch(NumberFormatException e){
+            resNombre.setForeground(Color.red);
+            resNombre.setText("NO HAY REGiSTROS");
+        }
+    }//GEN-LAST:event_btnVerificarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -95,7 +146,11 @@ public class VentanaMedico extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnVerificar;
     private javax.swing.JLabel fondo;
     private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel resNombre;
+    private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
 }

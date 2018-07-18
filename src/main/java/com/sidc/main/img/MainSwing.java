@@ -80,7 +80,6 @@ public class MainSwing {
             throw new ExceptionInInitializerError(e);
             
         }
-
     }
     
 }

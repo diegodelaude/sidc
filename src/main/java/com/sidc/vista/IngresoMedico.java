@@ -5,6 +5,9 @@
  */
 package com.sidc.vista;
 
+import com.sidc.clases.Medico;
+import com.sidc.controllers.ControllerMedico;
+import static com.sidc.controllers.ControllerMedico.getMedicoByMatricula;
 import java.awt.Image;
 import java.awt.Toolkit;
 
@@ -87,6 +90,11 @@ public class IngresoMedico extends javax.swing.JFrame {
         btnSiguiente.setForeground(new java.awt.Color(0, 153, 153));
         btnSiguiente.setText("Siguiente");
         btnSiguiente.setBorderPainted(false);
+        btnSiguiente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSiguienteActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnSiguiente, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 550, -1, -1));
 
         btnSalir.setBackground(new java.awt.Color(0, 0, 0));
@@ -124,6 +132,18 @@ public class IngresoMedico extends javax.swing.JFrame {
         t.setLocationRelativeTo(null);
         //t.dispose();// TODO add your handling code here:
     }//GEN-LAST:event_btnSalirActionPerformed
+
+    private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
+        Medico m;
+        VentanaMedico vm=new VentanaMedico();
+        int matriculaMedico = Integer.parseInt(txtUsuario.getText());
+        m = getMedicoByMatricula(matriculaMedico);
+        if (ControllerMedico.verificar(matriculaMedico,txtPassword.getText())){
+             vm.setLocationRelativeTo(null);
+             vm.setVisible(true);
+        }
+// TODO add your handling code here:
+    }//GEN-LAST:event_btnSiguienteActionPerformed
 
     /**
      * @param args the command line arguments

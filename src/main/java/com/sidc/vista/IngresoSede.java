@@ -149,11 +149,6 @@ public class IngresoSede extends javax.swing.JFrame {
        if (ControllerSede.verificar(idSede,txtContraseña.getText()))
              vs.setLocationRelativeTo(null);
              vs.setVisible(true);
-          // s = getSedeById(idSede);
-           //for(Vacuna v : s.getVacunas()){
-             //  vacunas.addElement(v);
-          // }
-       
     }//GEN-LAST:event_btnSiguienteActionPerformed
 
     /**

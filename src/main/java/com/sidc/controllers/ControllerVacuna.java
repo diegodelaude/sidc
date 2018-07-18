@@ -54,7 +54,7 @@ public class ControllerVacuna {
         return v;
     }
     
-    public static List<Vacuna> listarVacunasByPersona(Persona p) {
+    public static List<Vacuna> listarVacunasByPehrsona(Persona p) {
         Session session = MainSwing.sessionFactory.openSession();
         session.beginTransaction();
         Persona pe = getPersonaByDni(p.getDni());
@@ -62,4 +62,13 @@ public class ControllerVacuna {
         session.close();
         return pe.getVacunas();
 }
+    public static List<Vacuna> listarVacunasByPersona(Persona p) {
+        int dni = p.getDni();
+        Session session = MainSwing.sessionFactory.openSession();
+        session.beginTransaction();
+        Query query = session.createQuery("from vacunasaplicadas where dni = "+dni);
+        List<Vacuna> list = query.list();
+        return list;
+}
+    
 }

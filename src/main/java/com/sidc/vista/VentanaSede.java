@@ -10,6 +10,7 @@ import com.sidc.clases.Sede;
 import com.sidc.clases.Vacuna;
 import static com.sidc.controllers.ControllerPersona.getPersonaByDni;
 import static com.sidc.controllers.ControllerVacuna.getVacunaByNombre;
+import static com.sidc.controllers.ControllerVacuna.listarVacunas;
 import static com.sidc.controllers.ControllerVacuna.listarVacunasByPersona;
 import java.awt.Color;
 import java.awt.Image;
@@ -58,12 +59,10 @@ public class VentanaSede extends javax.swing.JFrame {
         btnVerificar = new javax.swing.JButton();
         resNombre = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        vacunaAplicada = new javax.swing.JTextField();
-        btnAgregar = new javax.swing.JButton();
         btnActualizar = new javax.swing.JButton();
         resAgregar = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        vacunasPersona = new javax.swing.JList<>();
+        vacunas = new javax.swing.JList<>();
         fondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -107,25 +106,7 @@ public class VentanaSede extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Gill Sans MT", 3, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 153, 153));
         jLabel2.setText("Seleccione vacuna");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, 180, 30));
-
-        vacunaAplicada.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                vacunaAplicadaActionPerformed(evt);
-            }
-        });
-        getContentPane().add(vacunaAplicada, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 410, 200, -1));
-
-        btnAgregar.setBackground(new java.awt.Color(0, 0, 0));
-        btnAgregar.setFont(new java.awt.Font("Gill Sans MT", 3, 14)); // NOI18N
-        btnAgregar.setForeground(new java.awt.Color(0, 153, 153));
-        btnAgregar.setText("Agregar");
-        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAgregarActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 470, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 160, 180, 30));
 
         btnActualizar.setBackground(new java.awt.Color(0, 0, 0));
         btnActualizar.setFont(new java.awt.Font("Gill Sans MT", 3, 14)); // NOI18N
@@ -144,9 +125,9 @@ public class VentanaSede extends javax.swing.JFrame {
         resAgregar.setForeground(new java.awt.Color(0, 153, 153));
         getContentPane().add(resAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 420, 230, 40));
 
-        jScrollPane1.setViewportView(vacunasPersona);
+        jScrollPane1.setViewportView(vacunas);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 220, 110, 150));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, 220, 240));
 
         fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/cintaaaaa.gif"))); // NOI18N
         getContentPane().add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -158,21 +139,21 @@ public class VentanaSede extends javax.swing.JFrame {
         System.exit(0);        // TODO add your handling code here:
     }//GEN-LAST:event_btnSalirActionPerformed
    
-    DefaultListModel cosas=new DefaultListModel();
+    
     private void btnVerificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerificarActionPerformed
-         Persona p;
-       try{  
+        DefaultListModel cosas=new DefaultListModel();
+        Persona p;
+        vacunas.setModel(cosas);
+        try{  
          int numDni=Integer.parseInt(txtUsuario.getText());
          p=getPersonaByDni(numDni);
          resNombre.setText(p.getNombre()+" "+p.getApellido());
-         List<Vacuna> vacunas = listarVacunasByPersona(p);
-         for(Vacuna v : vacunas){
-            cosas.addElement(v.getNombre());
-         }
-         vacunasPersona.setModel(cosas);
-            //cosas.addElement(v.getNombre());  
-        // vacunasPersona.setModel(cosas);
-        
+         List<Vacuna> vacunas = listarVacunas();
+            for(Vacuna v : vacunas){
+                cosas.addElement(v.getNombre());         
+            }
+            //String valor = v.getNombre();
+            //cosas.addElement(valor);
        } 
         catch(NumberFormatException e){
            resNombre.setForeground(Color.red);
@@ -180,33 +161,13 @@ public class VentanaSede extends javax.swing.JFrame {
        }   
     }//GEN-LAST:event_btnVerificarActionPerformed
 
+    
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
         VentanaSede vs= new VentanaSede();
         this.dispose();
         vs.setVisible(true);
         vs.setLocationRelativeTo(null);
     }//GEN-LAST:event_btnActualizarActionPerformed
-
-    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-         Persona p; 
-         int numDni=Integer.parseInt(txtUsuario.getText());
-         p=getPersonaByDni(numDni);
-         Vacuna v = getVacunaByNombre(vacunaAplicada.getText());
-         if (!p.getVacunas().contains(v)){
-             p.getVacunas().add(v);
-             resAgregar.setText("VACUNA AGREGADA");
-         }
-         else{
-           resAgregar.setForeground(Color.red);
-           resAgregar.setText("VACUNA YA APLICADA");
-         }
-         vacunaAplicada.requestFocus();
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnAgregarActionPerformed
-
-    private void vacunaAplicadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vacunaAplicadaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_vacunaAplicadaActionPerformed
 
 //    /**
 //     * @param args the command line arguments
@@ -245,7 +206,6 @@ public class VentanaSede extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnActualizar;
-    private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnSalir;
     private javax.swing.JButton btnVerificar;
     private javax.swing.JLabel fondo;
@@ -255,8 +215,7 @@ public class VentanaSede extends javax.swing.JFrame {
     private javax.swing.JLabel resAgregar;
     private javax.swing.JLabel resNombre;
     private javax.swing.JTextField txtUsuario;
-    private javax.swing.JTextField vacunaAplicada;
-    private javax.swing.JList<String> vacunasPersona;
+    private javax.swing.JList<String> vacunas;
     // End of variables declaration//GEN-END:variables
 
     
