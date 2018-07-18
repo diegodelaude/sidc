@@ -4,21 +4,12 @@ import com.sidc.clases.Persona;
 import com.sidc.clases.Vacuna;
 import static com.sidc.controllers.ControllerPersona.getPersonaByDni;
 import com.sidc.main.img.MainSwing;
-import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.criteria.CriteriaQuery;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
 public class ControllerVacuna {
 
-    /*  public static boolean aplicable(Persona p, Vacuna v){
-        
-        if (p.getFechaNacimiento())
-        
-        return true;
-    }*/
-    
     public static void addVacuna(Vacuna v) {
         Session session = MainSwing.sessionFactory.openSession();
         session.beginTransaction();
@@ -27,7 +18,7 @@ public class ControllerVacuna {
         session.close();
     }
 
-     public static void eliminarVacuna(Vacuna v) {
+    public static void eliminarVacuna(Vacuna v) {
         Session session = MainSwing.sessionFactory.openSession();
         session.beginTransaction();
         Vacuna aux = session.get(Vacuna.class, v.getIdVacuna());
@@ -37,14 +28,15 @@ public class ControllerVacuna {
         session.getTransaction().commit();
         session.close();
     }
-    
+
     public static List<Vacuna> listarVacunas() {
         Session session = MainSwing.sessionFactory.openSession();
         session.beginTransaction();
         Query query = session.createQuery("from Vacuna");
         List<Vacuna> list = query.list();
         return list;
-}
+    }
+
     public static Vacuna getVacunaByNombre(String nombre) {
         Session session = MainSwing.sessionFactory.openSession();
         session.beginTransaction();
@@ -53,7 +45,7 @@ public class ControllerVacuna {
         session.close();
         return v;
     }
-    
+
     public static List<Vacuna> listarVacunasByPersona(Persona p) {
         Session session = MainSwing.sessionFactory.openSession();
         session.beginTransaction();
@@ -61,5 +53,5 @@ public class ControllerVacuna {
         session.getTransaction().commit();
         session.close();
         return pe.getVacunas();
-}
+    }
 }

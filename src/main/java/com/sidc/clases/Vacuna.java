@@ -1,4 +1,3 @@
-
 package com.sidc.clases;
 
 import java.util.Date;
@@ -15,7 +14,8 @@ public class Vacuna {
 
     public Vacuna() {
     }
- public Vacuna(String nombre, int meses, Date fechaVencimiento, int idVacuna) {
+
+    public Vacuna(String nombre, int meses, Date fechaVencimiento, int idVacuna) {
         this.nombre = nombre;
         this.meses = meses;
         this.fechaVencimiento = fechaVencimiento;

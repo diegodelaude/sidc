@@ -10,11 +10,10 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 import javax.persistence.criteria.CriteriaQuery;
-import javax.swing.JOptionPane;
 import org.hibernate.Session;
 
 public class ControllerPersona {
-    
+
     public static void insertarPersona(Persona c) {
         Session session = MainSwing.sessionFactory.openSession();
         session.beginTransaction();
@@ -31,14 +30,15 @@ public class ControllerPersona {
         session.close();
         return contraseña == aux.getPassword();
     }
-    
-    public static void actualizar(Persona p){
+
+    public static void actualizar(Persona p) {
         Session session = MainSwing.sessionFactory.openSession();
         session.beginTransaction();
         session.update(p);
         session.getTransaction().commit();
         session.close();
-    } 
+    }
+
     public static Persona getPersonaByDni(int dni) {
         Session session = MainSwing.sessionFactory.openSession();
         session.beginTransaction();
@@ -52,8 +52,8 @@ public class ControllerPersona {
         Session session = MainSwing.sessionFactory.openSession();
         session.beginTransaction();
         if (habilitar(p, contraseña)) {
-           HistoriaClinica aux = session.get(HistoriaClinica.class, p.getNroHistoriaClinica());
-            
+            HistoriaClinica aux = session.get(HistoriaClinica.class, p.getNroHistoriaClinica());
+
             session.getTransaction().commit();
             session.close();
             return aux;
@@ -63,16 +63,6 @@ public class ControllerPersona {
         return null;
     }
 
-//    public List<Vacuna> mostrarVacunas(Persona p) {
-//        Session session = MainSwing.sessionFactory.openSession();
-//        session.beginTransaction();
-//        Persona aux = session.get(Persona.class, p.getDni());
-//        session.getTransaction().commit();
-//        session.close();
-//        return aux.getHistoriaClinica().getVacunas();
-//    }
-    
-    
     public static List<Persona> listarPersonas() {
         List<Persona> list = new ArrayList();
         Session session = MainSwing.sessionFactory.openSession();
@@ -84,6 +74,7 @@ public class ControllerPersona {
         session.close();
         return list;
     }
+
     public static void enviarAlerta() {
         List<Vacuna> vacunas = listarVacunas();
         List<Persona> personas = listarPersonas();

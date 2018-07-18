@@ -1,4 +1,3 @@
-
 package com.sidc.clases;
 
 public class Medico {

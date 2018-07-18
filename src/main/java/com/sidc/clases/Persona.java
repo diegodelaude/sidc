@@ -1,4 +1,3 @@
-
 package com.sidc.clases;
 
 import java.util.Date;
@@ -19,7 +18,7 @@ public class Persona {
     protected String letra;
     protected List<Vacuna> vacunas;
     protected Integer nroHistoriaClinica;
-    
+
     public Persona() {
     }
 
@@ -27,7 +26,7 @@ public class Persona {
         this.nombre = nombre;
         this.apellido = apellido;
         this.dni = dni;
-       // this.fechaNacimiento = fechaNacimiento;
+        // this.fechaNacimiento = fechaNacimiento;
         this.telefono = telefono;
         this.email = email;
         this.password = password;
@@ -48,22 +47,20 @@ public class Persona {
         this.numero = numero;
         this.historiaClinica = historiaClinica;
     }*/
-
-    public Persona(Integer dni, String nombre, String apellido,Date fechaNacimiento, String email, String telefono, Integer nroHC, String contraseña, String calle, Integer numero, Integer piso, String dpto) {
-        this.dni=dni;
-        this.nombre=nombre;
-        this.apellido=apellido;
-        this.fechaNacimiento=fechaNacimiento;
-        this.email=email;
-        this.telefono=telefono;
-        this.nroHistoriaClinica=nroHC;
-        this.password=contraseña;
-        this.calle=calle;
-        this.numero=numero;
-        this.piso=piso;
-        this.letra=dpto;
+    public Persona(Integer dni, String nombre, String apellido, Date fechaNacimiento, String email, String telefono, Integer nroHC, String contraseña, String calle, Integer numero, Integer piso, String dpto) {
+        this.dni = dni;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.fechaNacimiento = fechaNacimiento;
+        this.email = email;
+        this.telefono = telefono;
+        this.nroHistoriaClinica = nroHC;
+        this.password = contraseña;
+        this.calle = calle;
+        this.numero = numero;
+        this.piso = piso;
+        this.letra = dpto;
     }
-    
 
     public Integer getNumero() {
         return numero;
@@ -153,17 +150,10 @@ public class Persona {
         this.email = email;
     }
 
-
     public Integer getNroHistoriaClinica() {
         return nroHistoriaClinica;
     }
-
-    /* public HistoriaClinica getHistoriaClinica() {
-    return historiaClinica;
-    }
-    public void setHistoriaClinica(HistoriaClinica historiaClinica) {
-    this.historiaClinica = historiaClinica;
-    }*/
+    
     public void setNroHistoriaClinica(Integer nroHistoriaClinica) {
         this.nroHistoriaClinica = nroHistoriaClinica;
     }

@@ -1,13 +1,10 @@
 
 package com.sidc.clases;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
 
 public class HistoriaClinica {
+
     private int id;
     private List<Antecedente> historial;
     private List<String> alergias;
@@ -19,11 +16,9 @@ public class HistoriaClinica {
         this.grupoSanguineo = grupoSanguineo;
     }
 
-    
-
-
     public HistoriaClinica() {
     }
+
     public int getId() {
         return id;
     }
@@ -47,7 +42,6 @@ public class HistoriaClinica {
     public void setHistorial(List<Antecedente> historial) {
         this.historial = historial;
     }
-
 
     public List<String> getAlergias() {
         return alergias;
