@@ -1,7 +1,6 @@
 package com.sidc.controllers;
 
 import com.sidc.clases.Sede;
-import com.sidc.clases.Vacuna;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -11,7 +10,6 @@ import javax.persistence.criteria.CriteriaQuery;
 
 public class ControllerSede {
 
-   
     public static List<Sede> listarSedes() {
         List<Sede> list = new ArrayList();
         Session session = MainSwing.sessionFactory.openSession();
@@ -33,7 +31,7 @@ public class ControllerSede {
         session.getTransaction().commit();
         session.close();
     }
-    
+
     public static Sede getSedeById(int id) {
         Session session = MainSwing.sessionFactory.openSession();
         session.beginTransaction();
@@ -42,10 +40,10 @@ public class ControllerSede {
         session.close();
         return s;
     }
-    
-    public static boolean verificar(int id, String contraseña){
+
+    public static boolean verificar(int id, String contraseña) {
         Sede s = getSedeById(id);
-        if(s.getContraseña().equals(contraseña)){
+        if (s.getContraseña().equals(contraseña)) {
             return true;
         }
         return false;
